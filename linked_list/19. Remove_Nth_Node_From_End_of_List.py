@@ -14,16 +14,16 @@ class Solution(object):
         '''
             1 2 3 4 5
         '''
-        target = head
-        detect = head
-        dummy = ListNode(None, next=head)
-        pre = dummy
-        for i in range(n):
-            detect = detect.next 
-        while detect:
-            detect = detect.next 
-            target = target.next 
+        
+        dummy = pre = ListNode(next=head)
+        fast:ListNode = head
+        slow = head
+        for i in range(n - 1):
+            fast = fast.next
+        while fast.next:
+            fast = fast.next
+            slow = slow.next 
             pre = pre.next
-        pre.next = target.next 
+        
+        pre.next = slow.next 
         return dummy.next
-            
