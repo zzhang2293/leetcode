@@ -4,34 +4,30 @@ class ListNode:
         self.next = next
 class Solution:
     def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
-        remain, cur = 0, head
         dummy = ListNode(next=head)
-        res = head.next
-        pre, cur = dummy, head
-        while cur:
-            remain += 1
-            cur = cur.next
-        cur = head
-        while remain >= k:
-            change = k 
-            h = cur
-            while change:
-                change -= 1
-                nxt = cur.next 
-                cur.next = pre
-                pre = cur
-                cur = nxt
-            h.next = cur
-            change = k
-            while dummy.next:
-                print(dummy.next.val)
-                dummy = dummy.next
-            remain -= k
-        head = res
+        groupPrev = dummy
+        while True:
+            kth = self.getKth(groupPrev, k)
+            if not kth:
+                break
+            group_next = kth.next 
+            prev, curr = kth.next , groupPrev.next
+            while curr != group_next:
+                tmp = curr.next 
+                curr.next = prev
+                prev = curr
+                curr = tmp
+            tmp = groupPrev.next
+            groupPrev.next = kth
+            groupPrev = tmp
+            
+    def getKth(self, curr, k) -> ListNode:
+        while curr and k > 0:
+            k -= 1
+        return curr
+            
+        
             
 node = ListNode(1,ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
 obj = Solution()
 obj.reverseKGroup(node, 2)
-while node:
-    print(node.val)
-    node = node
