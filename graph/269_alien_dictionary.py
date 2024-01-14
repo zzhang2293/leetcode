@@ -13,7 +13,8 @@ class Solution:
             ptr = 0
             while ptr < len(words[first]) and ptr < len(words[second]) and words[first][ptr] == words[second][ptr]:
                 ptr += 1
-            if ptr < len(words[first]) and ptr < len(words[second]) and words[first][ptr] != words[second][ptr] and words[second][ptr] not in adj[words[first][ptr]]:
+            if ptr < len(words[first]) and ptr < len(words[second]) and words[first][ptr] != words[second][ptr] and \
+                    words[second][ptr] not in adj[words[first][ptr]]:
                 adj[words[first][ptr]].append(words[second][ptr])
             elif len(words[first]) > ptr >= len(words[second]) and words[first][ptr - 1] == words[second][ptr - 1]:
                 return ""
@@ -39,7 +40,6 @@ class Solution:
             if not dfs(node_lst[0]): return ""
             cur_visited.clear()
         return "".join(res)
-
 
 
 print(Solution().alienOrder(["abc", "ab"]))
